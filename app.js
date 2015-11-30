@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 //server.listen(3000);
-mongoose.connect('mongodb://localhost/items', function(err){
+mongoose.connect('mongodb://localhost/SmartCabinet', function(err){
 	if(err){
 		console.log(err);
 	}
@@ -14,6 +14,11 @@ mongoose.connect('mongodb://localhost/items', function(err){
 	}
 });
 
+var userSchema = new Schema({
+	name: String,
+	pass : String
+})
+
 var itemSchema = new Schema({
 	item: String,
 	quantity: Number
@@ -21,7 +26,7 @@ var itemSchema = new Schema({
 
 var Item = mongoose.model('Item', itemSchema);
 	
-
+var User = mongoose.model('User', userSchema);
 
 
 
