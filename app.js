@@ -1,42 +1,43 @@
-var express = require('express');
-var app = express();
-var server = require('http').createServer(app);
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var express = require('express'),
+	app = express(),
+	server = require('http').createServer(app),
+	io = require('socket.io').listen(server),
+	mongoose = require('mongoose');
+	
+server.listen(3000);
 
-//server.listen(3000);
-mongoose.connect('mongodb://localhost/SmartCabinet', function(err){
+mongoose.connect('mongodb://localhost/items', function(err){
 	if(err){
 		console.log(err);
-	}
-	else{
-		console.log('Connected to db.');
+	}else{
+		console.log('Connected to mongodb');
 	}
 });
 
-var userSchema = new Schema({
-	name: String,
-	pass : String
-})
-
-var itemSchema = new Schema({
-	item: String,
-	quantity: Number
+var itemSchema = mongoose.Schema({
+	item : String,
+	type : String
 });
 
-var Item = mongoose.model('Item', itemSchema);
+var Items = mongoose.model('Item', itemSchema);
+
+app.get('/', function(req, res){
+	res.sendFile(__dirname + '/index.html');
+});
+
+
+
+io.sockets.on('connection', function(socket){
+
+	socket.on('send item', function(data){
+		var itm = data.item.trim();
+		var typ = data.type.trim();
+		console.log(data.type);
+		var newItem = new Items({item: itm, type: typ });
+		newItem.save(function(err){
+			if (err) throw err;
+			if (err) return console.error(err);
 	
-var User = mongoose.model('User', userSchema);
-
-
-
-
-
-
-
-
-
-
-/**
- * @author Ziggy
- */
+	});
+	});
+});

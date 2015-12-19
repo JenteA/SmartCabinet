@@ -1,0 +1,43 @@
+<html>
+	<head>
+		<title>Smart Cabinet</title>
+		<style>
+			#vragen{
+				height:500px;
+			}
+		</style>
+		
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+			jQuery(function($){
+				var socket = io.connect();
+				var $itemForm = $('#send-item');
+				var $itemBox = $('#item');
+				var $items = $('#items');
+				var $type = $('#type');
+				
+				$itemForm.submit(function(e){
+					e.preventDefault();
+					socket.emit('send item', {item: $itemBox.val(), type: $type.val() });
+					$itemBox.val('');
+					$type.val('');
+				});
+				
+				function displayQuestions(data){
+					
+					$items.append(data+"<br/>");
+				}
+			});
+		</script>
+	</head>
+	
+	<body>
+		<div id="items"></div>
+		<form id="send-item">
+			<input size="35" id="item" placeholder="Item" />
+			<input size="35" id="type" placeholder="Type"/>
+			<input type="submit" />
+		</form>
+	</body>
+</html>
