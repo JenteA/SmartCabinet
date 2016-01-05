@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var mongojs = require('mongojs');
 var db = mongojs('items', ['items']);
+var users = mongojs('users', ['users']);
 var bodyParser = require('body-parser');
 
 
@@ -16,11 +17,17 @@ app.get('/Site', function(req, res){
 		console.log(docs);
 		res.json(docs);
 	});
-	//db.items.find(function(err, docs){
-		//console.log(docs);
-		//res.json(docs);
-	//});
 });
+
+app.get('/Site/login', function(req, res){
+	console.log('I received a GET request');
+	
+	db.users.find(function(err, dbUsers){
+		console.log(dbUsers);
+		res.json(dbUsers);
+	});
+});
+
 
 //data wordt toegevoegd aan de database
 app.post('/Site', function(req, res){
