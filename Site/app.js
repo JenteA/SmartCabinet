@@ -2,8 +2,9 @@ var express = require('express');
 var app = express();
 var mongojs = require('mongojs');
 var db = mongojs('items', ['items']);
-var users = mongojs('users', ['users']);
+var users = mongojs('items', ['users']);
 var bodyParser = require('body-parser');
+var show = false;
 
 
 app.use(express.static(__dirname));
@@ -17,17 +18,9 @@ app.get('/Site', function(req, res){
 		console.log(docs);
 		res.json(docs);
 	});
-});
-
-app.get('/Site/login', function(req, res){
-	console.log('I received a GET request');
 	
-	db.users.find(function(err, dbUsers){
-		console.log(dbUsers);
-		res.json(dbUsers);
-	});
-});
 
+});
 
 //data wordt toegevoegd aan de database
 app.post('/Site', function(req, res){
@@ -36,6 +29,17 @@ app.post('/Site', function(req, res){
 		res.json(doc);
 	});
 });
+
+app.post("/Site/login", function(req, res){
+	console.log(req.body.user);
+	users.users.find({"user": req.body.user},function(err, dbUsers){
+		console.log(dbUsers);
+		if (dbUsers != ""){
+		res.json(true);
+		}
+		else res.json(false);
+	})
+})
 
 //data verwijderen uit de database
 app.delete('/Site/:id', function(req, res){

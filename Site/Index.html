@@ -21,7 +21,7 @@
 	<input class="form-control" ng-model="user.user"/>
 	<button  ng-click="login(user.user)" >Login</button>
 	
-	<div >
+	<div>
 	<table class="table">
 		<thead>
 			<tr>
@@ -45,7 +45,7 @@
 				</select>
 				</td>
 				<td>
-				<button class="btn btn-primary" ng-click="addItem()">
+				<button class="btn btn-primary" ng-click="addItem()" ng-show="knoppen">
 					Toevoegen
 				</button></td>
 				<!--<td>
@@ -58,7 +58,7 @@
 				<td>{{item.item}}</td>
 				<td>{{item.type}}</td>
 				<td>
-				<button class="btn btn-danger" ng-click="remove(item._id)">
+				<button class="btn btn-danger" ng-click="remove(item._id)" ng-show="knoppen">
 					Verwijderen
 				</button></td>
 				<!--<td>

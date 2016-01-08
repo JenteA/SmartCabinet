@@ -2,6 +2,7 @@ var myApp = angular.module('myApp', []);
 
 ( function() {
 		var AppCtrl = function($scope, $http) {
+			$scope.knoppen = false;
 
 			console.log("Hello World from controller");
 
@@ -50,7 +51,14 @@ var myApp = angular.module('myApp', []);
 				});
 			};
 			
-
+			
+			$scope.login = function(){
+				console.log($scope.user);
+				$http.post("/Site/login", $scope.user).success(function(response){
+					console.log(response);
+					$scope.knoppen = response;
+				})
+			};
 
 		}
 		angular.module('myApp').controller('AppCtrl', ["$scope", '$http', AppCtrl]);
