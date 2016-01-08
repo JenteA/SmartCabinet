@@ -16,7 +16,11 @@ var itemSchema = mongoose.Schema({
 	type : {
 		type: String,
 		required: true
-	}
+	},
+	id : {
+		type: String,
+		required: true
+	},
 });
 
 var Items = mongoose.model('Item', itemSchema);
