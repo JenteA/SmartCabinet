@@ -4,7 +4,12 @@ var mongojs = require('mongojs');
 var db = mongojs('items', ['items']);
 var users = mongojs('items', ['users']);
 var bodyParser = require('body-parser');
+<<<<<<< HEAD
 var show = false;
+=======
+var SerialPort = require("serialport").SerialPort;
+var serialport = new SerialPort("/dev/cu.usbserial-A900JI7K",{baudrate:9600});
+>>>>>>> origin/master
 
 
 app.use(express.static(__dirname));
@@ -24,10 +29,18 @@ app.get('/Site', function(req, res){
 
 //data wordt toegevoegd aan de database
 app.post('/Site', function(req, res){
-	console.log(req.body);
-	db.items.insert(req.body, function(err, doc){
-		res.json(doc);
-	});
+	console.log("post request");
+		serialport.on('open', function(){
+			console.log('Serial Port Opend');
+			serialport.on('data', function(data){
+				console.log(String.fromCharCode(data[0]));
+				req.body.id = String.fromCharCode(data);
+
+				db.items.insert(req.body, function(err, doc){
+				res.json(doc);
+				});
+			});
+		});
 });
 
 app.post("/Site/login", function(req, res){
@@ -67,7 +80,7 @@ app.put("/Site/:id", function(req, res){
 		update: {$set: {item: req.body.item, type: req.body.type}},
 		new: true}, function(err, doc){
 			res.json(doc);
-	});
+		});
 });
 
 app.listen(3000);
