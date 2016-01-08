@@ -4,12 +4,9 @@ var mongojs = require('mongojs');
 var db = mongojs('items', ['items']);
 var users = mongojs('items', ['users']);
 var bodyParser = require('body-parser');
-<<<<<<< HEAD
 var show = false;
-=======
 var SerialPort = require("serialport").SerialPort;
 var serialport = new SerialPort("/dev/cu.usbserial-A900JI7K",{baudrate:9600});
->>>>>>> origin/master
 
 
 app.use(express.static(__dirname));
