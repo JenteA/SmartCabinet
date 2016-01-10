@@ -1,53 +1,53 @@
 <!DOCTYPE >
 <html ng-app="myApp">
-	<head>
+<head>
 	<title>Smartcabinet</title>
 	
-		<!-- Latest compiled and minified CSS -->
+	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
-		<!-- Optional theme -->
+	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-  	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.js"></script>    
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.js"></script>    
 	<script src="Controllers/controller.js"></script>
-	</head>
-	<body>
-		<h1>
-	Smartcabinet
-</h1>
+</head>
+<body>
+	<h1>
+		Smartcabinet
+	</h1>
 
-<div class="container" ng-controller="AppCtrl">
-	<input class="form-control" ng-model="user.user"/>
-	<button  ng-click="login(user.user)" >Login</button>
-	
-	<div>
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Vraag</th>
-				<th>Type</th>
-				<th>Action</th>
-				<th>&nbsp;</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>
-				<input class="form-control" ng-model="item.item" />
-				</td>
-				<td>
-				<select class="form-control" ng-model="item.type">
-  					<option value="Weerstand">Weerstand</option>
-  					<option value="Condensator">Condensator</option>
-  					<option value="Transformator">Transformator</option>
-  					<option value="Spoel">Spoel</option>
-				</select>
-				</td>
-				<td>
-				<button class="btn btn-primary" ng-click="addItem()" ng-show="knoppen">
-					Toevoegen
-				</button></td>
+	<div class="container" ng-controller="AppCtrl">
+		<input class="form-control" ng-model="user.user"/>
+		<button  ng-click="login(user.user)" >Login</button>
+		
+		<div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Vraag</th>
+						<th>Type</th>
+						<th>Action</th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<input class="form-control" ng-model="item.item" />
+						</td>
+						<td>
+							<select class="form-control" ng-model="item.type">
+								<option value="Weerstand">Weerstand</option>
+								<option value="Condensator">Condensator</option>
+								<option value="Transformator">Transformator</option>
+								<option value="Spoel">Spoel</option>
+							</select>
+						</td>
+						<td>
+							<button class="btn btn-primary" ng-click="addItem()" ng-show="knoppen">
+								Toevoegen
+							</button></td>
 				<!--<td>
 				<button class="btn btn-info" ng-click="update()">
 					Update
@@ -58,9 +58,9 @@
 				<td>{{item.item}}</td>
 				<td>{{item.type}}</td>
 				<td>
-				<button class="btn btn-danger" ng-click="remove(item._id)" ng-show="knoppen">
-					Verwijderen
-				</button></td>
+					<button class="btn btn-danger" ng-click="remove(item._id)" ng-show="knoppen">
+						Verwijderen
+					</button></td>
 				<!--<td>
 				<button class="btn btn-warning" ng-click="edit(item._id)">
 					Aanpassen
@@ -68,8 +68,8 @@
 			</tr>
 		</tbody>
 	</table>
-	</div>
 </div>
-	</body>
-	
+</div>
+</body>
+
 </html>

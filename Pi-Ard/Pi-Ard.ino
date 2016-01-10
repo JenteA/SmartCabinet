@@ -72,6 +72,7 @@ void Read()
     val = mySerial.read();
     ArduinoData += String(val, HEX);
   }
+ ArduinoData += "\r\n";
 }
 
 void loop() {
@@ -92,7 +93,6 @@ void loop() {
     
     Read();
     Serial.println(ArduinoData);
-    
   }
  
 }
