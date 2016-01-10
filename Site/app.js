@@ -14,7 +14,11 @@ var myPort = new serialport("/dev/cu.usbserial-A900JI7K",{baudrate:9600, parser:
 myPort.on('open', function(){
 	console.log("Hier zit ik ook in");
 	myPort.on('data', function(data){
-		prodId = data;
+		if(data != "")
+		{
+			prodId = data;
+		}
+		
 		//console.log(prodId);
 	});
 });
@@ -49,11 +53,7 @@ app.get('/Site/login', function(req, res){
 app.post('/Site', function(req, res){
 	console.log("post request");
 	console.log(prodId);
-	while((prodId !== "") || (typeof prodId !== 'undefined'))
-	{
-		console.log(prodId);
-		var productID = prodId;
-	}
+	var productID = prodId;
 	console.log(productID);
 	prodId = "";
 	req.body.id = productID;
