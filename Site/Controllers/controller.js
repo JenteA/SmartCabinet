@@ -17,7 +17,7 @@ var myApp = angular.module('myApp', []);
 
 			refresh();
 
-			//vraag toevoegen aan database
+			//item toevoegen aan database
 			$scope.addItem = function() {
 				console.log($scope.item);
 				$http.post('/Site', $scope.item).success(function(response) {
@@ -36,6 +36,7 @@ var myApp = angular.module('myApp', []);
 
 			//data aanpassen, nog niet opslaan
 			$scope.edit = function(id) {
+				console.log("ik weet nimeer wat te doen")
 				console.log(id);
 				$http.get("/Site/" + id).success(function(response) {
 					$scope.item = response;
@@ -50,7 +51,20 @@ var myApp = angular.module('myApp', []);
 					refresh();
 				});
 			};
+
+			$scope.uitlenen = function(){
+				console.log("leen iets uuuiiiiittttt!!!!!!!");
+				$http.put("/Site/uitlenen").success(function(response) {
+					refresh();
+				});
+			};
 			
+			$scope.terugbrengen = function(){
+				console.log("breng iets teruuuug!!!!!!!");
+				$http.put("/Site/terugbrengen").success(function(response) {
+					refresh();
+				});
+			};
 			
 			$scope.login = function(){
 				console.log($scope.user);

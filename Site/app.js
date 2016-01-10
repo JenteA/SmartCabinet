@@ -63,32 +63,6 @@ app.post('/Site', function(req, res){
 	});
 });
 
-function manipulateSerialData(charID)
-{
-	for(var i=0; i< 7; i++)
-	{
-		prodId = prodId + charID;
-	}
-	return prodId;
-}
-
-function getSerialData()
-{
-	console.log("Ik zit erin");
-	serialport.on('open', function(){
-		console.log("Hier zit ik ook in");
-		serialport.on('data', function(data){
-			console.log("Yaaay ik kan data lezen");
-			while(String.fromCharCode(data[0]) == '')
-			{
-				console.log(String.fromCharCode(data[0]));
-				prodId = String.fromCharCode(data[0]);
-				
-			};
-		});
-	});
-};
-
 //data verwijderen uit de database
 app.delete('/Site/:id', function(req, res){
 	var id = req.params.id;
@@ -109,6 +83,7 @@ app.get('/Site/:id', function(req, res){
 
 //geselecteerde file aanpassen en wegschrijven naar de database
 app.put("/Site/:id", function(req, res){
+	console.log("ik zit in de verkeerde");
 	var id = req.params.id;
 	console.log(req.body.name);
 	db.items.findAndModify({query: {_id: mongojs.ObjectId(id)},
@@ -116,6 +91,30 @@ app.put("/Site/:id", function(req, res){
 		new: true}, function(err, doc){
 			res.json(doc);
 		});
+});
+
+app.put("/Site/uitlenen", function(req, res) {
+	console.log("ik ga uitlenen");
+	var productID = prodId;
+	var item = db.items.findOne({id: productID});
+	if(item.State == false)
+	{
+		db.items.findAndModify({query: {id: productID}, update: {$set: {State: true}}}, function(er, doc){
+			res.json(doc);
+		});
+	}
+});
+
+app.put("/Site/terugbrengen", function(req, res) {
+	console.log("ik ga terugbrengen");
+	var productID = prodId;
+	var item = db.items.findOne({id: productID});
+	if(item.State == true)
+	{
+		db.items.findAndModify({query: {id: productID}, update: {$set: {State: false}}}, function(er, doc){
+			res.json(doc);
+		});
+	}
 });
 
 app.listen(3000);

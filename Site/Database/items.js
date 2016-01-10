@@ -21,6 +21,12 @@ var itemSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
+	State : {
+		type: Boolean
+	},
+	NaamPersoon : {
+		type: String
+	}
 });
 
 var Items = mongoose.model('Item', itemSchema);
